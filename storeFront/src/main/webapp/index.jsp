@@ -41,7 +41,7 @@
 							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
 						</span>
 					</a>
-					<a type="button" class="list-group-item" style="cursor: pointer;">
+					<a type="button" class="list-group-item">
 						Fourth Article
 						<span class="pull-right">
 							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
