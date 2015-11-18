@@ -1,3 +1,6 @@
 */target
 */bin
 */bower_components
+.metadata
+.recommenders
+*/.project
