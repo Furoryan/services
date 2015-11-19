@@ -19,42 +19,156 @@
 		</div>
 	</nav>
 
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="col-lg-8">
-				<div class="list-group">
-					<a type="button" class="list-group-item" style="cursor: pointer;">
-						First Article
-						<span class="pull-right">
-							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
-						</span>
-					</a>
-					<a type="button" class="list-group-item" style="cursor: pointer;">
-						Second Article
-						<span class="pull-right">
-							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
-						</span>
-					</a>
-					<a type="button" class="list-group-item" style="cursor: pointer;">
-						Third Article
-						<span class="pull-right">
-							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
-						</span>
-					</a>
-					<a type="button" class="list-group-item">
-						Fourth Article
-						<span class="pull-right">
-							<button type="button" class="btn btn-default btn-xs">Ajouter au panier</button>
-						</span>
-					</a>
-				</div>
-			</div>
-			<div class="log-lg-4"></div>
+	<script type="text/mustache" id="articleList">
+		<div class="container">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td>{{name}}</td>
+						<td>{{description}}</td>
+						<td>{{price}}</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-primary">Ajouter au panier</button>
+						</td>
+					</tr>
+					<tr>
+						<td>Mary</td>
+						<td>Moe</td>
+						<td>mary@example.com</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-primary">Ajouter au panier</button>
+						</td>
+					</tr>
+					<tr>
+						<td>July</td>
+						<td>Dooley</td>
+						<td>july@example.com</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary">Ajouter au panier</button>
+							</td>
+						</tr>
+						<tr>
 
-		</div>
-	</div>
-	<script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="../../../bower_components/jquery.soap/jquery.soap.js"></script>
-	<script type="text/javascript" src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</script>
+
+		<div class="container">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>John</td>
+						<td>Doe</td>
+						<td>john@example.com</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-primary">Ajouter au panier</button>
+						</td>
+					</tr>
+					<tr>
+						<td>Mary</td>
+						<td>Moe</td>
+						<td>mary@example.com</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-primary">Ajouter au panier</button>
+						</td>
+					</tr>
+					<tr>
+						<td>July</td>
+						<td>Dooley</td>
+						<td>july@example.com</td>
+						<td>
+							<div class="col-lg-6" style="padding-left: 0px;">
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary">Ajouter au panier</button>
+							</td>
+						</tr>
+						<tr>
+
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+			<script type="text/javascript" src="../../../bower_components/jquery.soap/jquery.soap.js"></script>
+			<script type="text/javascript" src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		</body>
+		</html>
