@@ -1,21 +1,59 @@
 package supplier;
 
+import java.security.KeyStore.Entry;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
 
+import org.bson.Document;
+
+import com.mongodb.Block;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import shared.*;
 
 public class Supplier {
 	
-	private LinkedList<Article> articles;
+	public static void main(String args[]){
+		new Supplier();
+	}
+	
+	private HashMap<String, Article> articles;
 	
 	public Supplier(){
-		this.articles = new LinkedList<>();
+		this.articles = new HashMap<>();
+		loadData();
 	}
 	
 	private void loadData(){
 		MongoClient dbClient = new MongoClient();
+		MongoDatabase db = dbClient.getDatabase("supplier");
+		//db.createCollection("supplier");
+		MongoCollection<Document> coll = db.getCollection("articles");
+		FindIterable<Document> itr = coll.find();
+		itr.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+		    	String id = document.getObjectId("_id").toString();
+		    	
+		        Supplier.this.articles.put(
+		        	id,
+		        	new Article(
+			        	id,
+			        	document.getString("name"),
+			        	document.getString("description"),
+			        	document.getInteger("quantity"),
+			        	document.getDouble("price")
+			        )
+		        );
+		        
+		    }
+		});
 	}
 	
 	/**
@@ -25,9 +63,11 @@ public class Supplier {
 	public String[] getItemsNames(){
 		String [] s = new String[this.articles.size()];
 		int i=0;
-		for (Article a : this.articles){
-			s[i++] = a.name;
-		}
+		Iterator<Map.Entry<String, Article>> it = this.articles.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry<String, Article> pair = it.next();
+	        s[i++] = pair.getValue().name;
+	    }
 		return s;
 	}
 	
@@ -36,7 +76,12 @@ public class Supplier {
 	 * @return
 	 */
     public Article[] getItemsList(){
-    	return (Article[])this.articles.toArray();
+    	Article[] arts = new Article[this.articles.size()];
+    	int i = 0;
+    	for (Article a : this.articles.values()){
+    		arts[i++] = a;
+    	}
+    	return arts;
     }
     
     /**
@@ -45,6 +90,7 @@ public class Supplier {
      * @param endId
      * @return
      */
+    /*
     public Article[] getItemsList(int startId, int endId){
     	LinkedList<Article> list = new LinkedList<>();
     	for (Article a : this.articles){
@@ -54,6 +100,7 @@ public class Supplier {
     	}
     	return (Article[])list.toArray();
     }
+    */
     
     /**
      * Retourne une liste de count articles à partir de startId.
@@ -61,6 +108,7 @@ public class Supplier {
      * @param count
      * @return
      */
+    /*
     public Article[] getItemsListFrom(int startId, int count){
     	int i = 0;
     	Article[] list = new Article[count];
@@ -71,17 +119,15 @@ public class Supplier {
     	}
     	return list;
     }
+    */
     
     /**
      * Retourne un seul article par son id, ou null s'il n'existe pas.
      * @param id
      * @return
      */
-    public Article getItemByArticle(int id){
-    	for (Article a : this.articles){
-    		if (a.id == id) return a;
-    	}
-    	return null;
+    public Article getItemByArticle(String id){
+    	return this.articles.get(id);
     }
     
     /**
@@ -89,12 +135,14 @@ public class Supplier {
      * @param name
      * @return
      */
+    /*
     public Article getItemByName(String name){
     	for (Article a : this.articles){
     		if (a.name.equals(name)) return a;
     	}
     	return null;
     }
+    */
     
     public int getItemsCount(){
     	return this.articles.size();
