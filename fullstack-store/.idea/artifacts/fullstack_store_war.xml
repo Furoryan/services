@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fullstack-store:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="fullstack-store-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="fullstack-store:war exploded" />
+    </root>
+  </artifact>
+</component>

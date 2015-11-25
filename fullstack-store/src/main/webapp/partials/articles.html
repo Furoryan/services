@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-8">
+            <table class="table table-hover" ng-controller="ArticlesController">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="article in articles">
+                    <td>{{article.name}}</td>
+                    <td>{{article.price}}</td>
+                    <td style="width: 5%;">
+                        <input style="width: 50px;;" type="number" name="quantity" value="1" min="0" max="{{article.quantity}}" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" ng-controller="CartController" ng-click="addArticleToCart(article)">Ajouter au panier
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+</div>
