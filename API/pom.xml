@@ -1,8 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>fr.alma.services</groupId>
-  <artifactId>API</artifactId>
-  <version>1.0</version>
-  <packaging>jar</packaging>
-  <name>API services</name>
+	<modelVersion>4.0.0</modelVersion>
+	<name>API services</name>
+	<groupId>fr.alma.services</groupId>
+	<artifactId>API</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+  
+	<parent>
+		<groupId>fr.alma.services</groupId>
+		<artifactId>ServicesProject</artifactId>
+		<version>1.0</version>
+	</parent>
 </project>
