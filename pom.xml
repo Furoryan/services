@@ -9,5 +9,6 @@
   	<module>API</module>
   	<module>domaine</module>
 	<module>infra</module>
+	<module>StoreStub</module>
   </modules>
 </project> 
