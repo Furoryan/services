@@ -10,5 +10,7 @@
   	<module>domaine</module>
 	<module>infra</module>
 	<module>StoreStub</module>
+	<module>SupplierService</module>
+	<module>SupplierStub</module>
   </modules>
 </project> 

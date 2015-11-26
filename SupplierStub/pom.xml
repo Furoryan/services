@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.alma.services</groupId>
-    <artifactId>StoreStub</artifactId>
+    <artifactId>SupplierStub</artifactId>
     <version>1.0</version>
-    <name>StoreStub</name>
+    <name>SupplierStub</name>
     <repositories>
         <repository>
             <id>wso2-Nexus</id>
@@ -37,7 +37,7 @@
                 </executions>
                 <configuration>
                     <outputDirectory>${basedir}/generated-sources</outputDirectory>
-                    <databindingName>adb</databindingName><language>java</language><wsdlFile>http://localhost:9763/services/Store?wsdl</wsdlFile><portName>StoreHttpsSoap11Endpoint</portName>
+                    <databindingName>adb</databindingName><language>java</language><wsdlFile>http://localhost:9763/services/Supplier?wsdl</wsdlFile><portName>SupplierHttpsSoap12Endpoint</portName>
                 </configuration>
             </plugin>
             <plugin>
