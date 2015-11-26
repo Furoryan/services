@@ -37,7 +37,7 @@
                 </executions>
                 <configuration>
                     <outputDirectory>${basedir}/generated-sources</outputDirectory>
-                    <databindingName>adb</databindingName><language>java</language><wsdlFile>http://localhost:9763/services/Store?wsdl</wsdlFile><portName>StoreHttpsSoap11Endpoint</portName>
+                    <databindingName>adb</databindingName><language>java</language><wsdlFile>Store.wsdl</wsdlFile><portName>StoreHttpsSoap11Endpoint</portName>
                 </configuration>
             </plugin>
             <plugin>

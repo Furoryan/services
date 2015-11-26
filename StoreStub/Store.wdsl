@@ -1,0 +1,161 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2435="http://valueobject.domaine.alma.fr/xsd" xmlns:ns="http://impl.services.domaine.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://impl.services.domaine.alma.fr">
+    <wsdl:documentation>Store</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax2436="http://valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://impl.services.domaine.alma.fr">
+            <xs:import namespace="http://valueobject.domaine.alma.fr/xsd"/>
+            <xs:element name="articles">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="articlesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2435:IArticle"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="placeOrder">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2435:IArticle"/>
+                        <xs:element minOccurs="0" name="creditCard" nillable="true" type="ax2435:ICreditCard"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="placeOrderResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://valueobject.domaine.alma.fr/xsd">
+            <xs:complexType abstract="true" name="IArticle">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="price" type="xs:double"/>
+                    <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="ICreditCard">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cardCryptogram" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="expirationMonth" type="xs:int"/>
+                    <xs:element minOccurs="0" name="expirationYear" type="xs:int"/>
+                    <xs:element minOccurs="0" name="id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="money" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="placeOrderRequest">
+        <wsdl:part name="parameters" element="ns:placeOrder"/>
+    </wsdl:message>
+    <wsdl:message name="placeOrderResponse">
+        <wsdl:part name="parameters" element="ns:placeOrderResponse"/>
+    </wsdl:message>
+    <wsdl:message name="articlesRequest">
+        <wsdl:part name="parameters" element="ns:articles"/>
+    </wsdl:message>
+    <wsdl:message name="articlesResponse">
+        <wsdl:part name="parameters" element="ns:articlesResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="StorePortType">
+        <wsdl:operation name="placeOrder">
+            <wsdl:input message="ns:placeOrderRequest" wsaw:Action="urn:placeOrder"/>
+            <wsdl:output message="ns:placeOrderResponse" wsaw:Action="urn:placeOrderResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="articles">
+            <wsdl:input message="ns:articlesRequest" wsaw:Action="urn:articles"/>
+            <wsdl:output message="ns:articlesResponse" wsaw:Action="urn:articlesResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="StoreSoap11Binding" type="ns:StorePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="placeOrder">
+            <soap:operation soapAction="urn:placeOrder" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="articles">
+            <soap:operation soapAction="urn:articles" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="StoreSoap12Binding" type="ns:StorePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="placeOrder">
+            <soap12:operation soapAction="urn:placeOrder" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="articles">
+            <soap12:operation soapAction="urn:articles" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="StoreHttpBinding" type="ns:StorePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="placeOrder">
+            <http:operation location="placeOrder"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="articles">
+            <http:operation location="articles"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Store">
+        <wsdl:port name="StoreHttpsSoap11Endpoint" binding="ns:StoreSoap11Binding">
+            <soap:address location="https://192.168.1.3:9443/services/Store.StoreHttpsSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="StoreHttpSoap11Endpoint" binding="ns:StoreSoap11Binding">
+            <soap:address location="http://192.168.1.3:9763/services/Store.StoreHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="StoreHttpsSoap12Endpoint" binding="ns:StoreSoap12Binding">
+            <soap12:address location="https://192.168.1.3:9443/services/Store.StoreHttpsSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="StoreHttpSoap12Endpoint" binding="ns:StoreSoap12Binding">
+            <soap12:address location="http://192.168.1.3:9763/services/Store.StoreHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="StoreHttpEndpoint" binding="ns:StoreHttpBinding">
+            <http:address location="http://192.168.1.3:9763/services/Store.StoreHttpEndpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="StoreHttpsEndpoint" binding="ns:StoreHttpBinding">
+            <http:address location="https://192.168.1.3:9443/services/Store.StoreHttpsEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
