@@ -1,7 +1,7 @@
 package fr.alma.domaine.services;
 
-import fr.alma.domaine.valueObject.IArticle;
-import fr.alma.domaine.valueObject.ICreditCard;
+import fr.alma.domaine.valueobject.IArticle;
+import fr.alma.domaine.valueobject.ICreditCard;
 
 public interface IStore {
 	public IArticle[] articles();

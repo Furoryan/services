@@ -1,7 +1,7 @@
 package fr.alma.implementation.domaine.repositories;
 
 import fr.alma.domaine.repositories.PurchaseRepository;
-import fr.alma.domaine.valueObject.IArticle;
+import fr.alma.domaine.valueobject.IArticle;
 
 public class MongoPurchaseRepository implements PurchaseRepository {
 

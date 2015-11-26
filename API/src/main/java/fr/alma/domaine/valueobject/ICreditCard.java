@@ -1,4 +1,4 @@
-package fr.alma.domaine.valueObject;
+package fr.alma.domaine.valueobject;
 
 public interface ICreditCard {
 	public boolean hasEnoughMoney(double amount);

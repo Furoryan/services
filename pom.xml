@@ -12,5 +12,7 @@
 	<module>StoreStub</module>
 	<module>SupplierService</module>
 	<module>SupplierStub</module>
+	<module>BankService</module>
+	<module>BankStub</module>
   </modules>
 </project> 

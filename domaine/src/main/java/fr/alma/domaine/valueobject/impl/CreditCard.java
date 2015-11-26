@@ -1,6 +1,6 @@
-package fr.alma.domaine.valueObject.impl;
+package fr.alma.domaine.valueobject.impl;
 
-import fr.alma.domaine.valueObject.ICreditCard;
+import fr.alma.domaine.valueobject.ICreditCard;
 
 public class CreditCard {
 

@@ -1,6 +1,6 @@
 package fr.alma.domaine.repositories;
 
-import fr.alma.domaine.valueObject.IArticle;
+import fr.alma.domaine.valueobject.IArticle;
 
 public interface PurchaseRepository {
 

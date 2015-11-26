@@ -1,7 +1,7 @@
 package fr.alma.implementation.domaine.factories;
 
 import fr.alma.domaine.factories.ArticleFactory;
-import fr.alma.domaine.valueObject.impl.Article;
+import fr.alma.domaine.valueobject.impl.Article;
 
 public class SimpleArticleFactory implements ArticleFactory {
 	@Override

@@ -1,6 +1,6 @@
 package fr.alma.domaine.factories;
 
-import fr.alma.domaine.valueObject.IArticle;
+import fr.alma.domaine.valueobject.IArticle;
 
 
 public interface ArticleFactory  {

@@ -1,6 +1,6 @@
-package fr.alma.domaine.valueObject.impl;
+package fr.alma.domaine.valueobject.impl;
 
-import fr.alma.domaine.valueObject.IArticle;
+import fr.alma.domaine.valueobject.IArticle;
 
 public class Article implements IArticle {
 	private int id;
