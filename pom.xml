@@ -9,6 +9,7 @@
   	<module>API</module>
   	<module>domaine</module>
 	<module>infra</module>
+	<module>StoreService</module>
 	<module>StoreStub</module>
 	<module>SupplierService</module>
 	<module>SupplierStub</module>

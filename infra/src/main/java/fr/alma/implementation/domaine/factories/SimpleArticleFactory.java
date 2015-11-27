@@ -5,7 +5,7 @@ import fr.alma.domaine.valueobject.impl.Article;
 
 public class SimpleArticleFactory implements ArticleFactory {
 	@Override
-	public Article getArticle(int id, String name, String description, double price, int quantity){
+	public Article getArticle(String id, String name, String description, double price, int quantity){
 		return new Article(id, name, description, price, quantity);
 	}
 	

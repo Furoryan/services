@@ -1,7 +1,7 @@
 package fr.alma.domaine.valueobject;
 
 public interface IArticle {
-	public int getId();
+	public String getId();
 	
 	public String getName();
 	

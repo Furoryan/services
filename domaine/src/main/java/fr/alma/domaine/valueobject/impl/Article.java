@@ -3,13 +3,13 @@ package fr.alma.domaine.valueobject.impl;
 import fr.alma.domaine.valueobject.IArticle;
 
 public class Article implements IArticle {
-	private int id;
+	private String id;
 	private String name;
 	private String description;
 	private double price;
 	private int quantity;
 	
-	public Article(int id, String name, String description, double price, int quantity){
+	public Article(String id, String name, String description, double price, int quantity){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -17,7 +17,7 @@ public class Article implements IArticle {
 		this.quantity = quantity;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
