@@ -3,6 +3,7 @@ package fr.alma.supplier;
 import java.util.Map;
 import java.util.HashMap;
 import fr.alma.domaine.valueobject.IArticle;
+import fr.alma.domaine.valueobject.impl.Article;
 import fr.alma.domaine.factories.ArticleFactory;
 import fr.alma.implementation.domaine.factories.SimpleArticleFactory;
 
@@ -17,17 +18,18 @@ import org.bson.Document;
 public class Supplier {
 
 	ArticleFactory articleFactory;
-	private Map<String, IArticle> articleList;
+	private Map<String, Article> articleList;
 
 	public Supplier(){
 		// construire la Factory des articles
 		this.articleFactory = new SimpleArticleFactory();
 		// construire la liste des articles
-		this.articleList = new HashMap<String, IArticle>();
+		this.articleList = new HashMap<String, Article>();
 		/*
 		this.articleList.add(articleFactory.getArticle(1, "Article 1", "Description 1", 12.99, 10));
 		this.articleList.add(articleFactory.getArticle(2, "Article 2", "Description 2", 44.99, 5));
 		*/
+		this.loadData();
 	}
 
 	/**
@@ -47,7 +49,7 @@ public class Supplier {
 				
 				Supplier.this.articleList.put(
 					id,
-					articleFactory.getArticle(
+					(Article)articleFactory.getArticle(
 						id,
 						document.getString("name"),
 						document.getString("description"),
@@ -64,11 +66,11 @@ public class Supplier {
 		}
 	}
 
-	public IArticle[] getArticleList(){
-		return (IArticle[])articleList.values().toArray();
+	public Article[] getArticleList(){
+		return articleList.values().toArray(new Article[0]);
 	}
 	
-	public IArticle getArticleById(String id){
+	public Article getArticleById(String id){
 		return articleList.get(id);
 	}
 	

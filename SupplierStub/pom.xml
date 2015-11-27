@@ -4,7 +4,7 @@
     <groupId>fr.alma.services</groupId>
     <artifactId>SupplierStub</artifactId>
     <version>1.0</version>
-    <name>SupplierStub</name>
+    <name>Stub::SupplierStub</name>
     <repositories>
         <repository>
             <id>wso2-Nexus</id>
