@@ -5,21 +5,17 @@ package fr.alma.services.actions.data;
  */
 public class Article {
 
-
-    private static int id;
+    private int id;
     private String name;
     private String description;
     private double price;
     private int quantity;
 
 
-    public Article(){
-        this.id = id++;
-    }
 
 
-    public Article(String name, String description, double price, int quantity){
-        this.id = id++;
+    public Article(int id, String name, String description, double price, int quantity){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -29,10 +25,6 @@ public class Article {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public static int getId() {
-        return id;
     }
 
     public String getName() {
@@ -46,4 +38,7 @@ public class Article {
     public double getPrice() {
         return price;
     }
+
+    public int getId() { return id; }
+
 }
