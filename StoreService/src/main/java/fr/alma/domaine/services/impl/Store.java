@@ -77,6 +77,7 @@ public class Store implements IStore {
 				arts[i].setDescription(a.getDescription());
 				arts[i].setPrice(a.getPrice());
 				arts[i].setQuantity(a.getQuantity());
+				i++;
 			}
 			param.setArticles(arts);
 			PlaceOrderResponse por = stub.placeOrder(param);
