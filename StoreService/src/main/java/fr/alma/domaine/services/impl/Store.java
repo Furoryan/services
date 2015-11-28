@@ -16,6 +16,9 @@ import fr.alma.domaine.valueobject.impl.*;
 import fr.alma.supplier.SupplierStub;
 import fr.alma.supplier.SupplierStub.GetArticleList;
 import fr.alma.supplier.SupplierStub.GetArticleListResponse;
+import fr.alma.supplier.SupplierStub.OrderStatus;
+import fr.alma.supplier.SupplierStub.PlaceOrder;
+import fr.alma.supplier.SupplierStub.PlaceOrderResponse;
 /*
 import fr.alma.domaine.factories.*;
 import fr.alma.implementation.domaine.factories.*;
@@ -61,6 +64,37 @@ public class Store implements IStore {
 		return (Article[])this.articles.values().toArray(new Article[0]);
 	}
 	public String placeOrder(IArticle[] articles, ICreditCard creditCard){
-		return null;
+		// Vérifier la dispo de tous les articles
+		try {
+			SupplierStub stub = new SupplierStub("http://127.0.0.1:9763/services/Supplier/");
+			PlaceOrder param = new PlaceOrder();
+			SupplierStub.Article[] arts = new SupplierStub.Article[articles.length];
+			int i = 0;
+			for (IArticle a : articles){
+				arts[i] = new SupplierStub.Article();
+				arts[i].setId(a.getId());
+				arts[i].setName(a.getName());
+				arts[i].setDescription(a.getDescription());
+				arts[i].setPrice(a.getPrice());
+				arts[i].setQuantity(a.getQuantity());
+			}
+			param.setArticles(arts);
+			PlaceOrderResponse por = stub.placeOrder(param);
+			OrderStatus os = por.get_return();
+			if (os.getStatus() == false){
+				return "ERROR:Des articles sont indisponibles";
+			}
+		} catch (AxisFault e) {
+			// TODO traiter ça proprement
+			e.printStackTrace();
+		} catch (RemoteException e){
+			// TODO traiter ça proprement
+			e.printStackTrace();
+		}
+		
+		// Vérifier la carte bancaire
+		// TODO
+		
+		return "SUCCESS";
 	}
 }

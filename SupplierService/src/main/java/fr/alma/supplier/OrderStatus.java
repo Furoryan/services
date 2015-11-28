@@ -8,6 +8,9 @@ public class OrderStatus {
 	
 	/** Indique si la commande a pu être passée ou non */
 	boolean status;
+	
+	/** Identifiant de la transaction */
+	String transactionId;
 
 	public Article[] getArticles() {
 		return articles;
