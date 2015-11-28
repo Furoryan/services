@@ -2,6 +2,9 @@ package fr.alma.supplier;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 import fr.alma.domaine.valueobject.IArticle;
 import fr.alma.domaine.valueobject.impl.Article;
 import fr.alma.domaine.factories.ArticleFactory;
@@ -66,10 +69,19 @@ public class Supplier {
 		}
 	}
 
+	/**
+	 * Retourne la liste des articles.
+	 * @return La liste des articles
+	 */
 	public Article[] getArticleList(){
 		return articleList.values().toArray(new Article[0]);
 	}
 	
+	/**
+	 * Retourne un article spécifique.
+	 * @param id L'identifiant
+	 * @return un Article
+	 */
 	public Article getArticleById(String id){
 		return articleList.get(id);
 	}
@@ -77,6 +89,42 @@ public class Supplier {
 	public void removeArticle(String id){
 		// TODO ??? 
 		//articleList.get(id);
+	}
+	
+	/**
+	 * Effectue une commande fournisseur.
+	 * @param articles La liste des articles
+	 * @return Le statut de la commande fournisseur
+	 */
+	public synchronized OrderStatus placeOrder(Article [] articles){
+		OrderStatus os = new OrderStatus();
+		List<Article> outOfStockList = new LinkedList<Article>();
+		for(Article a : articles){
+			Article cmp = this.articleList.get(a.getId());
+			if (cmp == null){
+				outOfStockList.add(a);
+				continue;
+			}
+			if (cmp.getQuantity() < a.getQuantity()){
+				outOfStockList.add(a);
+			}
+		}
+		if (outOfStockList.size() > 0){
+			os.articles = outOfStockList.toArray(new Article[0]);
+			os.status = false;
+			return os;
+		}else{
+			// retrait des quantités
+			for (Article a : articles){
+				Article old = this.articleList.remove(a.getId());
+				Article newOne = new Article(old.getId(), old.getName(), old.getDescription(), old.getPrice(), old.getQuantity() - a.getQuantity());
+				this.articleList.put(newOne.getId(), newOne);
+				// TODO update l'article sur la DB
+			}
+			os.status = true;
+			return os;
+		}
+		
 	}
 	
 }

@@ -1,181 +1,242 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ax2450="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://supplier.alma.fr">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2358="http://supplier.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax2356="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://supplier.alma.fr">
     <wsdl:documentation>Supplier</wsdl:documentation>
     <wsdl:types>
-        <xs:schema xmlns:ax2451="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
-            <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd"/>
-            <xs:element name="getArticleById">
+        <xs:schema xmlns:ax2357="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ax2360="http://supplier.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
+            <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
+            <xs:import namespace="http://supplier.alma.fr/xsd" />
+            <xs:element name="placeOrder">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2357:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="getArticleByIdResponse">
+            <xs:element name="placeOrderResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2450:Article"/>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2358:OrderStatus" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="removeArticle">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticleById">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticleByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2357:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="getArticleList">
                 <xs:complexType>
-                    <xs:sequence/>
+                    <xs:sequence />
                 </xs:complexType>
             </xs:element>
             <xs:element name="getArticleListResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2450:Article"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2357:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
+        <xs:schema xmlns:ax2359="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr/xsd">
+            <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
+            <xs:complexType name="OrderStatus">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2356:Article" />
+                    <xs:element minOccurs="0" name="status" type="xs:boolean" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://impl.valueobject.domaine.alma.fr/xsd">
             <xs:complexType name="Article">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="price" type="xs:double"/>
-                    <xs:element minOccurs="0" name="quantity" type="xs:int"/>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+                    <xs:element minOccurs="0" name="price" type="xs:double" />
+                    <xs:element minOccurs="0" name="quantity" type="xs:int" />
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="getArticleByIdRequest">
-        <wsdl:part name="parameters" element="ns:getArticleById"/>
-    </wsdl:message>
-    <wsdl:message name="getArticleByIdResponse">
-        <wsdl:part name="parameters" element="ns:getArticleByIdResponse"/>
-    </wsdl:message>
-    <wsdl:message name="removeArticleRequest">
-        <wsdl:part name="parameters" element="ns:removeArticle"/>
-    </wsdl:message>
     <wsdl:message name="getArticleListRequest">
-        <wsdl:part name="parameters" element="ns:getArticleList"/>
+        <wsdl:part name="parameters" element="ns:getArticleList" />
     </wsdl:message>
     <wsdl:message name="getArticleListResponse">
-        <wsdl:part name="parameters" element="ns:getArticleListResponse"/>
+        <wsdl:part name="parameters" element="ns:getArticleListResponse" />
+    </wsdl:message>
+    <wsdl:message name="removeArticleRequest">
+        <wsdl:part name="parameters" element="ns:removeArticle" />
+    </wsdl:message>
+    <wsdl:message name="getArticleByIdRequest">
+        <wsdl:part name="parameters" element="ns:getArticleById" />
+    </wsdl:message>
+    <wsdl:message name="getArticleByIdResponse">
+        <wsdl:part name="parameters" element="ns:getArticleByIdResponse" />
+    </wsdl:message>
+    <wsdl:message name="placeOrderRequest">
+        <wsdl:part name="parameters" element="ns:placeOrder" />
+    </wsdl:message>
+    <wsdl:message name="placeOrderResponse">
+        <wsdl:part name="parameters" element="ns:placeOrderResponse" />
     </wsdl:message>
     <wsdl:portType name="SupplierPortType">
-        <wsdl:operation name="getArticleById">
-            <wsdl:input message="ns:getArticleByIdRequest" wsaw:Action="urn:getArticleById"/>
-            <wsdl:output message="ns:getArticleByIdResponse" wsaw:Action="urn:getArticleByIdResponse"/>
+        <wsdl:operation name="getArticleList">
+            <wsdl:input message="ns:getArticleListRequest" wsaw:Action="urn:getArticleList" />
+            <wsdl:output message="ns:getArticleListResponse" wsaw:Action="urn:getArticleListResponse" />
         </wsdl:operation>
         <wsdl:operation name="removeArticle">
-            <wsdl:input message="ns:removeArticleRequest" wsaw:Action="urn:removeArticle"/>
+            <wsdl:input message="ns:removeArticleRequest" wsaw:Action="urn:removeArticle" />
         </wsdl:operation>
-        <wsdl:operation name="getArticleList">
-            <wsdl:input message="ns:getArticleListRequest" wsaw:Action="urn:getArticleList"/>
-            <wsdl:output message="ns:getArticleListResponse" wsaw:Action="urn:getArticleListResponse"/>
+        <wsdl:operation name="getArticleById">
+            <wsdl:input message="ns:getArticleByIdRequest" wsaw:Action="urn:getArticleById" />
+            <wsdl:output message="ns:getArticleByIdResponse" wsaw:Action="urn:getArticleByIdResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="placeOrder">
+            <wsdl:input message="ns:placeOrderRequest" wsaw:Action="urn:placeOrder" />
+            <wsdl:output message="ns:placeOrderResponse" wsaw:Action="urn:placeOrderResponse" />
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="SupplierSoap11Binding" type="ns:SupplierPortType">
-        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-        <wsdl:operation name="getArticleById">
-            <soap:operation soapAction="urn:getArticleById" style="document"/>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="getArticleList">
+            <soap:operation soapAction="urn:getArticleList" style="document" />
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" />
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="removeArticle">
-            <soap:operation soapAction="urn:removeArticle" style="document"/>
+            <soap:operation soapAction="urn:removeArticle" style="document" />
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" />
             </wsdl:input>
         </wsdl:operation>
-        <wsdl:operation name="getArticleList">
-            <soap:operation soapAction="urn:getArticleList" style="document"/>
+        <wsdl:operation name="getArticleById">
+            <soap:operation soapAction="urn:getArticleById" style="document" />
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" />
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="placeOrder">
+            <soap:operation soapAction="urn:placeOrder" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:binding name="SupplierSoap12Binding" type="ns:SupplierPortType">
-        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-        <wsdl:operation name="getArticleById">
-            <soap12:operation soapAction="urn:getArticleById" style="document"/>
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="getArticleList">
+            <soap12:operation soapAction="urn:getArticleList" style="document" />
             <wsdl:input>
-                <soap12:body use="literal"/>
+                <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
-                <soap12:body use="literal"/>
+                <soap12:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="removeArticle">
-            <soap12:operation soapAction="urn:removeArticle" style="document"/>
+            <soap12:operation soapAction="urn:removeArticle" style="document" />
             <wsdl:input>
-                <soap12:body use="literal"/>
+                <soap12:body use="literal" />
             </wsdl:input>
         </wsdl:operation>
-        <wsdl:operation name="getArticleList">
-            <soap12:operation soapAction="urn:getArticleList" style="document"/>
+        <wsdl:operation name="getArticleById">
+            <soap12:operation soapAction="urn:getArticleById" style="document" />
             <wsdl:input>
-                <soap12:body use="literal"/>
+                <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
-                <soap12:body use="literal"/>
+                <soap12:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="placeOrder">
+            <soap12:operation soapAction="urn:placeOrder" style="document" />
+            <wsdl:input>
+                <soap12:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" />
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:binding name="SupplierHttpBinding" type="ns:SupplierPortType">
-        <http:binding verb="POST"/>
-        <wsdl:operation name="getArticleById">
-            <http:operation location="getArticleById"/>
+        <http:binding verb="POST" />
+        <wsdl:operation name="getArticleList">
+            <http:operation location="getArticleList" />
             <wsdl:input>
-                <mime:content type="text/xml" part="parameters"/>
+                <mime:content type="text/xml" part="parameters" />
             </wsdl:input>
             <wsdl:output>
-                <mime:content type="text/xml" part="parameters"/>
+                <mime:content type="text/xml" part="parameters" />
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="removeArticle">
-            <http:operation location="removeArticle"/>
+            <http:operation location="removeArticle" />
             <wsdl:input>
-                <mime:content type="text/xml" part="parameters"/>
+                <mime:content type="text/xml" part="parameters" />
             </wsdl:input>
         </wsdl:operation>
-        <wsdl:operation name="getArticleList">
-            <http:operation location="getArticleList"/>
+        <wsdl:operation name="getArticleById">
+            <http:operation location="getArticleById" />
             <wsdl:input>
-                <mime:content type="text/xml" part="parameters"/>
+                <mime:content type="text/xml" part="parameters" />
             </wsdl:input>
             <wsdl:output>
-                <mime:content type="text/xml" part="parameters"/>
+                <mime:content type="text/xml" part="parameters" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="placeOrder">
+            <http:operation location="placeOrder" />
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters" />
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters" />
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="Supplier">
         <wsdl:port name="SupplierHttpsSoap11Endpoint" binding="ns:SupplierSoap11Binding">
-            <soap:address location="https://192.168.27.116:9443/services/Supplier.SupplierHttpsSoap11Endpoint/"/>
+            <soap:address location="https://192.168.1.52:9443/services/Supplier.SupplierHttpsSoap11Endpoint/" />
         </wsdl:port>
         <wsdl:port name="SupplierHttpSoap11Endpoint" binding="ns:SupplierSoap11Binding">
-            <soap:address location="http://192.168.27.116:9763/services/Supplier.SupplierHttpSoap11Endpoint/"/>
-        </wsdl:port>
-        <wsdl:port name="SupplierHttpsSoap12Endpoint" binding="ns:SupplierSoap12Binding">
-            <soap12:address location="https://192.168.27.116:9443/services/Supplier.SupplierHttpsSoap12Endpoint/"/>
+            <soap:address location="http://192.168.1.52:9763/services/Supplier.SupplierHttpSoap11Endpoint/" />
         </wsdl:port>
         <wsdl:port name="SupplierHttpSoap12Endpoint" binding="ns:SupplierSoap12Binding">
-            <soap12:address location="http://192.168.27.116:9763/services/Supplier.SupplierHttpSoap12Endpoint/"/>
+            <soap12:address location="http://192.168.1.52:9763/services/Supplier.SupplierHttpSoap12Endpoint/" />
         </wsdl:port>
-        <wsdl:port name="SupplierHttpEndpoint" binding="ns:SupplierHttpBinding">
-            <http:address location="http://192.168.27.116:9763/services/Supplier.SupplierHttpEndpoint/"/>
+        <wsdl:port name="SupplierHttpsSoap12Endpoint" binding="ns:SupplierSoap12Binding">
+            <soap12:address location="https://192.168.1.52:9443/services/Supplier.SupplierHttpsSoap12Endpoint/" />
         </wsdl:port>
         <wsdl:port name="SupplierHttpsEndpoint" binding="ns:SupplierHttpBinding">
-            <http:address location="https://192.168.27.116:9443/services/Supplier.SupplierHttpsEndpoint/"/>
+            <http:address location="https://192.168.1.52:9443/services/Supplier.SupplierHttpsEndpoint/" />
+        </wsdl:port>
+        <wsdl:port name="SupplierHttpEndpoint" binding="ns:SupplierHttpBinding">
+            <http:address location="http://192.168.1.52:9763/services/Supplier.SupplierHttpEndpoint/" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
