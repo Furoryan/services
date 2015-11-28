@@ -43,7 +43,7 @@ public class Supplier {
 			MongoCollection<Document> coll = db.getCollection("articles");
 			FindIterable<Document> itr = coll.find();
 			itr.forEach(new Block<Document>() {
-			    @Override
+			    
 			    public void apply(final Document document) {
 				String id = document.getObjectId("_id").toString();
 				
