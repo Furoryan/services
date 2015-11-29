@@ -93,7 +93,7 @@ public class Store implements IStore {
 				arts[i].setId(a.getId());
 				arts[i].setName(a.getName());
 				arts[i].setDescription(a.getDescription());
-				arts[i].setPrice(a.getPrice());
+				arts[i].setPrice(a.getPrice() * 1.20);
 				arts[i].setQuantity(a.getQuantity());
 				i++;
 			}

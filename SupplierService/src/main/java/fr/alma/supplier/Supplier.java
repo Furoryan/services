@@ -85,10 +85,12 @@ public class Supplier {
 		return articleList.get(id);
 	}
 	
+	/*
 	public void removeArticle(String id){
 		// TODO ??? 
 		//articleList.get(id);
 	}
+	*/
 	
 	/** Numéro de transaction incrémental */
 	private int transacId = 1;
