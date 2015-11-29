@@ -1,19 +1,20 @@
 package fr.alma.domaine.services.impl;
 
-import fr.alma.domaine.services.IStore;
-import fr.alma.domaine.valueobject.IArticle;
-import fr.alma.domaine.valueobject.ICreditCard;
-
+import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.axis2.AxisFault;
 
-import java.rmi.RemoteException;
-import java.util.HashMap;
-
-import fr.alma.domaine.valueobject.*;
-import fr.alma.domaine.valueobject.impl.*;
+import fr.alma.bank.BankStub;
+import fr.alma.bank.BankStub.Payment;
+import fr.alma.bank.BankStub.PaymentResponse;
+import fr.alma.domaine.services.IStore;
+import fr.alma.domaine.valueobject.IArticle;
+import fr.alma.domaine.valueobject.ICreditCard;
+import fr.alma.domaine.valueobject.impl.Article;
 import fr.alma.supplier.SupplierStub;
+import fr.alma.supplier.SupplierStub.CancelOrder;
 import fr.alma.supplier.SupplierStub.GetArticleList;
 import fr.alma.supplier.SupplierStub.GetArticleListResponse;
 import fr.alma.supplier.SupplierStub.OrderStatus;
@@ -58,10 +59,12 @@ public class Store implements IStore {
 		
 	}
 	
-	
+	/*
 	public String testPlaceOrder(){
 		String r = "test 1 should be true:";
-		r += placeOrder(new Article[]{new Article("5659eabf0f8038a656e29bcd", "Nom Article 4", "Description article 4", 81.37, 7)},
+		r += placeOrder(new Article[]{
+					new Article("5659eabf0f8038a656e29bcd", "Nom Article 4", "Description article 4", 81.37, 7),
+					new Article("5659eabf0f8038a656e29bce", "Nom Article 2", "Description article 2", 14.28, 1)},
 				new CreditCard("code", 123, 12, 16, 3000));
 		r += " \n test 2 should be false:";
 		r += placeOrder(new Article[]{new Article("5659eabf0f8038a656e29bcd", "Nom Article 4", "Description article 4", 81.37, 200)},
@@ -71,15 +74,18 @@ public class Store implements IStore {
 						new CreditCard("code", 123, 12, 16, 3000));
 		return r;
 	}
+	*/
 	
 	public Article[] articles(){
 		return (Article[])this.articles.values().toArray(new Article[0]);
 	}
 	public String placeOrder(IArticle[] articles, ICreditCard creditCard){
+		String transacId = null;
 		// Vérifier la dispo de tous les articles
 		try {
 			SupplierStub stub = new SupplierStub("http://127.0.0.1:9763/services/Supplier/");
 			PlaceOrder param = new PlaceOrder();
+			
 			SupplierStub.Article[] arts = new SupplierStub.Article[articles.length];
 			int i = 0;
 			for (IArticle a : articles){
@@ -97,6 +103,7 @@ public class Store implements IStore {
 			if (os.getStatus() == false){
 				return "ERROR:Des articles sont indisponibles";
 			}
+			transacId = os.getTransactionId();
 		} catch (AxisFault e) {
 			e.printStackTrace();
 			return "ERROR:AxisFault:" + e.getMessage();
@@ -105,9 +112,41 @@ public class Store implements IStore {
 			return "ERROR:RemoteException:" + e.getMessage();
 		}
 		
-		// Vérifier la carte bancaire
-		// TODO
+		// calcul du total
+		double amount = 0;
+		for (IArticle a : articles){
+			amount += a.getPrice() * a.getQuantity();
+		}
 		
-		return "SUCCESS";
+		// Vérifier la carte bancaire
+		try {
+			BankStub stub = new BankStub();
+			Payment param = new Payment();
+			param.setCardNumber(creditCard.getCardNumber());
+			param.setMonth(creditCard.getExpirationMonth());
+			param.setYear(creditCard.getExpirationYear());
+			param.setCryptogram(creditCard.getCardCryptogram());
+			param.setAmount(amount);
+			PaymentResponse pr = stub.payment(param);
+			if (pr.get_return()){
+				return "SUCCESS";
+			}else{
+				// pas assez de sous!
+				// on annule la commande auprès du fournisseur
+				SupplierStub suppStub = new SupplierStub();
+				CancelOrder p = new CancelOrder();
+				p.setTransacId(transacId);	
+				if (!suppStub.cancelOrder(p).get_return()){
+					// le fournisseur n'a pas pu annuler la commande => gros PB!
+				}
+				return "ERROR:payment";
+			}		
+		} catch (AxisFault e) {
+			e.printStackTrace();
+			return "ERROR:AxisFault:" + e.getMessage();
+		} catch (RemoteException e){
+			e.printStackTrace();
+			return "ERROR:RemoteException:" + e.getMessage();
+		}
 	}
 }

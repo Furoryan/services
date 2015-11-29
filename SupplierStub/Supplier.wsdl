@@ -1,7 +1,7 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2367="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax2369="http://supplier.alma.fr/xsd" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://supplier.alma.fr">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2376="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ax2378="http://supplier.alma.fr/xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://supplier.alma.fr">
     <wsdl:documentation>Supplier</wsdl:documentation>
     <wsdl:types>
-        <xs:schema xmlns:ax2368="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ax2371="http://supplier.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
+        <xs:schema xmlns:ax2380="http://supplier.alma.fr/xsd" xmlns:ax2377="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
             <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
             <xs:import namespace="http://supplier.alma.fr/xsd" />
             <xs:element name="removeArticle">
@@ -14,14 +14,14 @@
             <xs:element name="placeOrder">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2367:Article" />
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2376:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="placeOrderResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2369:OrderStatus" />
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2380:OrderStatus" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -33,7 +33,7 @@
             <xs:element name="getArticleListResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2367:Article" />
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2376:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -47,17 +47,32 @@
             <xs:element name="getArticleByIdResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2367:Article" />
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2376:Article" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelOrder">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="transacId" nillable="true" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelOrderResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
-        <xs:schema xmlns:ax2370="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr/xsd">
+        <xs:schema xmlns:ax2379="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr/xsd">
             <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
             <xs:complexType name="OrderStatus">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2367:Article" />
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2376:Article" />
                     <xs:element minOccurs="0" name="status" type="xs:boolean" />
+                    <xs:element minOccurs="0" name="transactionId" nillable="true" type="xs:string" />
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
@@ -82,6 +97,12 @@
     <wsdl:message name="removeArticleRequest">
         <wsdl:part name="parameters" element="ns:removeArticle" />
     </wsdl:message>
+    <wsdl:message name="cancelOrderRequest">
+        <wsdl:part name="parameters" element="ns:cancelOrder" />
+    </wsdl:message>
+    <wsdl:message name="cancelOrderResponse">
+        <wsdl:part name="parameters" element="ns:cancelOrderResponse" />
+    </wsdl:message>
     <wsdl:message name="getArticleByIdRequest">
         <wsdl:part name="parameters" element="ns:getArticleById" />
     </wsdl:message>
@@ -101,6 +122,10 @@
         </wsdl:operation>
         <wsdl:operation name="removeArticle">
             <wsdl:input message="ns:removeArticleRequest" wsaw:Action="urn:removeArticle" />
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <wsdl:input message="ns:cancelOrderRequest" wsaw:Action="urn:cancelOrder" />
+            <wsdl:output message="ns:cancelOrderResponse" wsaw:Action="urn:cancelOrderResponse" />
         </wsdl:operation>
         <wsdl:operation name="getArticleById">
             <wsdl:input message="ns:getArticleByIdRequest" wsaw:Action="urn:getArticleById" />
@@ -127,6 +152,15 @@
             <wsdl:input>
                 <soap:body use="literal" />
             </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <soap:operation soapAction="urn:cancelOrder" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getArticleById">
             <soap:operation soapAction="urn:getArticleById" style="document" />
@@ -164,6 +198,15 @@
                 <soap12:body use="literal" />
             </wsdl:input>
         </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <soap12:operation soapAction="urn:cancelOrder" style="document" />
+            <wsdl:input>
+                <soap12:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="getArticleById">
             <soap12:operation soapAction="urn:getArticleById" style="document" />
             <wsdl:input>
@@ -199,6 +242,15 @@
             <wsdl:input>
                 <mime:content type="text/xml" part="parameters" />
             </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="cancelOrder">
+            <http:operation location="cancelOrder" />
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters" />
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters" />
+            </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getArticleById">
             <http:operation location="getArticleById" />
