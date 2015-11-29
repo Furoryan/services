@@ -6,3 +6,8 @@
 */.project
 *.classpath
 */.settings/*
+SupplierStub/generated-sources/src/fr/alma/supplier/SupplierStub.java
+SupplierStub/generated-sources/src/fr/alma/supplier/SupplierCallbackHandler.java
+SupplierStub/generated-sources/build.xml
+.settings/org.eclipse.m2e.core.prefs
+.project

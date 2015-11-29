@@ -2,7 +2,7 @@ package fr.alma.domaine.valueobject.impl;
 
 import fr.alma.domaine.valueobject.ICreditCard;
 
-public class CreditCard {
+public class CreditCard implements ICreditCard {
 
 	private int id;
 	private double money;
@@ -36,7 +36,7 @@ public class CreditCard {
 		return money - amount >= 0;
 	}
 	
-	public boolean isCardValid(CreditCard c){
+	public boolean isCardValid(ICreditCard c){
 		return this.equals(c);
 	}
 	

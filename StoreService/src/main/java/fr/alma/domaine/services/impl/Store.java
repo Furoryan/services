@@ -59,7 +59,19 @@ public class Store implements IStore {
 	}
 	
 	
-
+	public String testPlaceOrder(){
+		String r = "test 1 should be true:";
+		r += placeOrder(new Article[]{new Article("5659eabf0f8038a656e29bcd", "Nom Article 4", "Description article 4", 81.37, 7)},
+				new CreditCard("code", 123, 12, 16, 3000));
+		r += " \n test 2 should be false:";
+		r += placeOrder(new Article[]{new Article("5659eabf0f8038a656e29bcd", "Nom Article 4", "Description article 4", 81.37, 200)},
+				new CreditCard("code", 123, 12, 16, 3000));
+		r += " \n test 3 should be false:";
+		r += placeOrder(new Article[]{new Article("5659eabf0f8038a650000000", "Nom Article 4", "Description article 4", 81.37, 1)},
+						new CreditCard("code", 123, 12, 16, 3000));
+		return r;
+	}
+	
 	public Article[] articles(){
 		return (Article[])this.articles.values().toArray(new Article[0]);
 	}
@@ -86,11 +98,11 @@ public class Store implements IStore {
 				return "ERROR:Des articles sont indisponibles";
 			}
 		} catch (AxisFault e) {
-			// TODO traiter ça proprement
 			e.printStackTrace();
+			return "ERROR:AxisFault:" + e.getMessage();
 		} catch (RemoteException e){
-			// TODO traiter ça proprement
 			e.printStackTrace();
+			return "ERROR:RemoteException:" + e.getMessage();
 		}
 		
 		// Vérifier la carte bancaire
