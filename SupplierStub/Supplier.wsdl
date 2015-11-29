@@ -1,27 +1,39 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2358="http://supplier.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax2356="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://supplier.alma.fr">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax2367="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ax2369="http://supplier.alma.fr/xsd" xmlns:ns="http://supplier.alma.fr" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://supplier.alma.fr">
     <wsdl:documentation>Supplier</wsdl:documentation>
     <wsdl:types>
-        <xs:schema xmlns:ax2357="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ax2360="http://supplier.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
+        <xs:schema xmlns:ax2368="http://impl.valueobject.domaine.alma.fr/xsd" xmlns:ax2371="http://supplier.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr">
             <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
             <xs:import namespace="http://supplier.alma.fr/xsd" />
+            <xs:element name="removeArticle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="placeOrder">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2357:Article" />
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2367:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="placeOrderResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2358:OrderStatus" />
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2369:OrderStatus" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="removeArticle">
+            <xs:element name="getArticleList">
+                <xs:complexType>
+                    <xs:sequence />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getArticleListResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2367:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -35,28 +47,16 @@
             <xs:element name="getArticleByIdResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2357:Article" />
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getArticleList">
-                <xs:complexType>
-                    <xs:sequence />
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getArticleListResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax2357:Article" />
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax2367:Article" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:schema>
-        <xs:schema xmlns:ax2359="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr/xsd">
+        <xs:schema xmlns:ax2370="http://impl.valueobject.domaine.alma.fr/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://supplier.alma.fr/xsd">
             <xs:import namespace="http://impl.valueobject.domaine.alma.fr/xsd" />
             <xs:complexType name="OrderStatus">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2356:Article" />
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="articles" nillable="true" type="ax2367:Article" />
                     <xs:element minOccurs="0" name="status" type="xs:boolean" />
                 </xs:sequence>
             </xs:complexType>

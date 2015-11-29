@@ -22,16 +22,15 @@ public class Supplier {
 
 	ArticleFactory articleFactory;
 	private Map<String, Article> articleList;
+	private List<Transaction> transactions;
 
 	public Supplier(){
 		// construire la Factory des articles
 		this.articleFactory = new SimpleArticleFactory();
 		// construire la liste des articles
 		this.articleList = new HashMap<String, Article>();
-		/*
-		this.articleList.add(articleFactory.getArticle(1, "Article 1", "Description 1", 12.99, 10));
-		this.articleList.add(articleFactory.getArticle(2, "Article 2", "Description 2", 44.99, 5));
-		*/
+		// construire la liste des transactions
+		this.transactions = new LinkedList<Transaction>();
 		this.loadData();
 	}
 
@@ -91,6 +90,9 @@ public class Supplier {
 		//articleList.get(id);
 	}
 	
+	/** Numéro de transaction incrémental */
+	private int transacId = 1;
+	
 	/**
 	 * Effectue une commande fournisseur.
 	 * @param articles La liste des articles
@@ -122,9 +124,28 @@ public class Supplier {
 				// TODO update l'article sur la DB
 			}
 			os.status = true;
+			String transactionId = Integer.toString(transacId);
+			
+			os.setTransactionId(transactionId);
+			this.transactions.add(new Transaction(transactionId, articles));
+			transacId++;
 			return os;
+		}	
+	}
+	
+	/**
+	 * Annule un ordre de commande.
+	 * @param transacId L'identifiant de la transaction
+	 * @return Vrai si la transaction a pu être annulée, faux sinon
+	 */
+	public synchronized boolean cancelOrder(String transacId){
+		for (Transaction t : this.transactions){
+			if (t.getId().equals(transacId)){
+				t.setCanceled(true);
+				return true;
+			}
 		}
-		
+		return false;
 	}
 	
 }

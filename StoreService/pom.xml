@@ -30,5 +30,10 @@
 			<artifactId>SupplierStub</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>fr.alma.services</groupId>
+			<artifactId>BankStub</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>
